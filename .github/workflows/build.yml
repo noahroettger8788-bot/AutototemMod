@@ -10,15 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Remove other JDKs (Forge must use Java 21)
-        run: |
-          sudo rm -rf /usr/lib/jvm/temurin-25-jdk-amd64 /usr/lib/jvm/temurin-17-jdk-amd64 /usr/lib/jvm/temurin-11-jdk-amd64 /usr/lib/jvm/temurin-8-jdk-amd64
-          ls /usr/lib/jvm
-
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: 21
+          java-version: 25
 
       - uses: gradle/actions/setup-gradle@v4
         with:
