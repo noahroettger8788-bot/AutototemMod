@@ -15,6 +15,9 @@ minecraft {
 
 repositories {
     mavenCentral()
+    minecraft.mavenizer(it)
+    maven fg.forgeMaven
+    maven fg.minecraftLibsMaven
 }
 
 dependencies {
