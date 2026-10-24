@@ -9,15 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+
+      - name: Remove other JDKs (Forge must use Java 21)
+        run: |
+          sudo rm -rf /usr/lib/jvm/temurin-25-jdk-amd64 /usr/lib/jvm/temurin-17-jdk-amd64 /usr/lib/jvm/temurin-11-jdk-amd64 /usr/lib/jvm/temurin-8-jdk-amd64
+          ls /usr/lib/jvm
+
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 21
+
       - uses: gradle/actions/setup-gradle@v4
         with:
-             gradle-version: 9.3.0
+          gradle-version: 9.3.0
+
       - name: Build
         run: gradle build --no-daemon
+
       - uses: actions/upload-artifact@v4
         with:
           name: paykey-jar
